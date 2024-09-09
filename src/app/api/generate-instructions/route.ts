@@ -45,28 +45,28 @@ export async function POST(req: NextRequest) {
 
         [
             {
-                "testCaseId": "TC-01",
-                "testCaseDescription": "Verify user registration with valid email and password",
-                "preConditions": "None",
+                "testId": "TC-01",
+                "testDescription": "Verify user registration with valid email and password",
+                "preCondition": "None",
                 "testSteps": [
                 "Open the registration page",
                 "Enter a valid email address in the email field",
                 "Enter a valid password in the password field",
                 "Click the 'Register' button"
                 ],
-                "expectedResult": "The user should be successfully registered and redirected to the login page or a welcome page."
+                "expectedResults": "The user should be successfully registered and redirected to the login page or a welcome page."
             },
             {
-                "testCaseId": "TC-02",
-                "testCaseDescription": "Verify user registration with an existing email address",
-                "preConditions": "A user account with the same email address already exists.",
+                "testId": "TC-02",
+                "testDescription": "Verify user registration with an existing email address",
+                "preCondition": "A user account with the same email address already exists.",
                 "testSteps": [
                 "Open the registration page",
                 "Enter the existing email address in the email field",
                 "Enter a valid password in the password field",
                 "Click the 'Register' button"
                 ],
-                "expectedResult": "The application should display an error message indicating that the email address is already in use."
+                "expectedResults": "The application should display an error message indicating that the email address is already in use."
             },
             // ... more test cases ...
         ]

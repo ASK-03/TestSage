@@ -7,9 +7,10 @@ import { SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 type Props = {
   isHero: boolean;
+  userId?: string;
 };
 
-const Navigation = async ({ isHero }: Props) => {
+const Navigation = async ({ isHero, userId }: Props) => {
   return (
     <>
       <div className="h-[6rem]"></div>
@@ -21,9 +22,19 @@ const Navigation = async ({ isHero }: Props) => {
         <aside className={cn("flex items-center gap-2")}>
           <span className="text-xl font-bold">TestSage</span>
         </aside>
+        {!isHero && (
+          <aside className="flex items-center gap-2">
+            <Link href={`/${userId}/generate-test`}>
+              <Button variant={"ghost"}>Generate Tests</Button>
+            </Link>
+            <Link href={`/${userId}/bookmarked-tests`}>
+              <Button variant={"ghost"}>Bookmarked Tests</Button>
+            </Link>
+          </aside>
+        )}
         <aside className="flex gap-2 items-center">
           {isHero && (
-            <Link href="/functionality">
+            <Link href="/verify-user">
               <Button>Generate Tests</Button>
             </Link>
           )}

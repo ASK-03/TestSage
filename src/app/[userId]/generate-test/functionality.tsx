@@ -15,16 +15,15 @@ import { useLLM } from "@/hooks/use-llm";
 import React, { useState } from "react";
 import { toast } from "sonner";
 import { useForm, Controller } from "react-hook-form";
-import ReactMarkdown from "react-markdown";
-import { Dot } from "lucide-react";
 import { cn } from "@/lib/utils";
+import TestCard from "../_components/TestCard";
 
 type TestCase = {
-  testCaseId: string;
-  testCaseDescription: string;
-  preConditions: string;
+  testId: string;
+  testDescription: string;
+  preCondition: string;
   testSteps: string[];
-  expectedResult: string;
+  expectedResults: string;
 };
 
 type FormValues = {
@@ -32,7 +31,11 @@ type FormValues = {
   images: FileList;
 };
 
-const Functionality = (props: {}) => {
+type Props = {
+  userId: string;
+};
+
+const Functionality = ({ userId }: Props) => {
   const [images, setImages] = useState<File[]>([]);
   const { generateInstructions, loading, data, error } = useLLM();
   const { control, handleSubmit, setValue, watch } = useForm<FormValues>();
@@ -70,7 +73,7 @@ const Functionality = (props: {}) => {
   const parsedData = data ? (JSON.parse(data.message) as TestCase[]) : [];
 
   return (
-    <div className="!bg-transparent !shadow-none mx-auto w-[90%] sm:w-[60%] min-w-[300px] mb-10">
+    <div className="!bg-transparent !shadow-none mx-auto w-[90%] sm:w-[60%] min-w-[300px]">
       <Card className="container">
         <CardHeader>
           <CardTitle>Generate Test Cases</CardTitle>
@@ -137,39 +140,7 @@ const Functionality = (props: {}) => {
 
       {parsedData.length > 0 &&
         parsedData.map((testData, index) => (
-          <Card key={index} className="my-4">
-            <CardHeader>
-              <CardTitle>{testData.testCaseId}</CardTitle>
-              <CardDescription>
-                <ReactMarkdown>{testData.testCaseDescription}</ReactMarkdown>
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex flex-col gap-4">
-              <div className="pre-conditions">
-                <h1 className="text-xl font-bold mb-2">Pre-conditions</h1>
-                <p className="ml-3">
-                  <ReactMarkdown>{testData.preConditions}</ReactMarkdown>
-                </p>
-              </div>
-              <div className="steps">
-                <h1 className="text-xl font-bold mb-2">Test Steps:</h1>
-                <ol className="ml-3 flex flex-col gap-1">
-                  {testData.testSteps.map((step, stepIndex) => (
-                    <li className="flex" key={stepIndex}>
-                      <Dot size={24} className="mr-1 text-primary" />
-                      <ReactMarkdown>{step}</ReactMarkdown>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-              <div className="results">
-                <h1 className="text-xl font-bold mb-2">Expected Result</h1>
-                <p className="ml-3">
-                  <ReactMarkdown>{testData.expectedResult}</ReactMarkdown>
-                </p>
-              </div>
-            </CardContent>
-          </Card>
+          <TestCard key={index} testData={testData} userId={userId} />
         ))}
     </div>
   );

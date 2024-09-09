@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   postgres:
-    container_name: container-pg
+    container_name: container-pg-testsage
     image: postgres
     hostname: localhost
     ports:
@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
 
   pgadmin:
-    container_name: container-pgadmin
+    container_name: container-pgadmin-testsage
     image: dpage/pgadmin4
     depends_on:
       - postgres
