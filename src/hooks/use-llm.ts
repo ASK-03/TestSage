@@ -3,7 +3,7 @@ import { useState } from "react";
 // Custom hook for handling the LLM request
 export const useLLM = () => {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<{ message: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const generateInstructions = async (formData: FormData) => {

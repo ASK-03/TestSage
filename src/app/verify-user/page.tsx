@@ -2,9 +2,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { getAuthUserDetails, initOrUpdateUserData } from "@/lib/queries";
 
-type Props = {};
-
-const SignUpForm = async (props: Props) => {
+const SignUpForm = async () => {
   const authUser = await currentUser();
   if (!authUser) {
     return redirect("/sign-in");

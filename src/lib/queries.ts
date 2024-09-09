@@ -1,6 +1,6 @@
 "use server";
 import { clerkClient, currentUser } from "@clerk/nextjs/server";
-import { db } from "./db";
+import db from "./db";
 import { User, UserBookmark } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 

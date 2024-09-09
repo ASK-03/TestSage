@@ -1,4 +1,3 @@
-import Navigation from "@/components/navigation";
 import Functionality from "./functionality";
 
 type Props = {

@@ -17,14 +17,7 @@ import { toast } from "sonner";
 import { useForm, Controller } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import TestCard from "../_components/TestCard";
-
-type TestCase = {
-  testId: string;
-  testDescription: string;
-  preCondition: string;
-  testSteps: string[];
-  expectedResults: string;
-};
+import { TestCase } from "@/lib/types";
 
 type FormValues = {
   context: string;
@@ -108,7 +101,7 @@ const Functionality = ({ userId }: Props) => {
               <Controller
                 name="images"
                 control={control}
-                render={({ field }) => (
+                render={({}) => (
                   <Input
                     type="file"
                     multiple

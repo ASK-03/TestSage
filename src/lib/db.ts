@@ -1,9 +1,14 @@
 import { PrismaClient } from "@prisma/client";
 
-declare global {
-  var prisma: PrismaClient | undefined;
+// Use a module-scoped variable to manage the Prisma client instance
+let prismaInstance: PrismaClient | undefined;
+
+// Initialize the Prisma client, either from the module-scoped variable or a new instance
+const db = prismaInstance || new PrismaClient();
+
+// Store the Prisma client in the module-scoped variable if not in production
+if (process.env.NODE_ENV !== "production") {
+  prismaInstance = db;
 }
 
-export const db = globalThis.prisma || new PrismaClient();
-
-if (process.env.NODE_ENV !== "production") globalThis.prisma = db;
+export default db;
