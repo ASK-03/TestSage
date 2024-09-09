@@ -9,6 +9,7 @@ import { getBookmarkedTests } from "@/lib/queries";
 import { Ghost } from "lucide-react";
 import React from "react";
 import TestCard from "../_components/TestCard";
+import { UserBookmark } from "@prisma/client";
 
 type Props = {
   params: {
@@ -29,7 +30,7 @@ const page = async ({ params }: Props) => {
         </CardHeader>
         {response.length > 0 ? (
           <CardContent>
-            {response.map((data, index) => {
+            {response.map((data: UserBookmark, index: number) => {
               const testData = {
                 testId: data.testId,
                 testDescription: data.testDescription,
